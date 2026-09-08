@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>Yaser Fitness</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#f3f4f6;color:#111827}
+header{background:#111827;color:white;padding:24px 18px 20px;border-radius:0 0 24px 24px}
+h1{margin:0 0 6px;font-size:28px}.sub{opacity:.8}.wrap{max-width:760px;margin:auto;padding:16px}
+.card{background:white;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 3px 14px #0000000d}
+.time{font-size:13px;color:#6b7280}.title{font-size:20px;font-weight:700;margin:4px 0 10px}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.pill{background:#e5e7eb;padding:5px 9px;border-radius:999px;font-size:12px}
+ul{margin:8px 0;padding-right:20px}li{margin:7px 0}.btn{border:0;border-radius:12px;padding:12px 15px;background:#111827;color:white;font-weight:700;font-size:15px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#f9fafb;border-radius:14px;padding:12px}.num{font-size:22px;font-weight:800}
+small{color:#6b7280}.notice{background:#fff7ed;border:1px solid #fed7aa;padding:12px;border-radius:14px;font-size:13px;line-height:1.6}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Yaser Fitness 💪</h1>
+<div class="sub">خسارة دهون + بناء عضلات</div>
+</div></header>
+<main class="wrap">
+<div class="card">
+<div class="grid">
+<div class="stat"><small>الوزن</small><div class="num">96 كغ</div></div>
+<div class="stat"><small>الطول</small><div class="num">170 سم</div></div>
+<div class="stat"><small>العمر</small><div class="num">21</div></div>
+<div class="stat"><small>البروتين</small><div class="num">150–170غ</div></div>
+</div>
+</div>
+
+<div class="notice">التطبيق يعطيك خطة يومية جاهزة. الكميات تقريبية ويمكن تعديلها حسب تقدم الوزن والجوع والأداء.</div>
+
+<section id="today"></section>
+
+<div class="card">
+<div class="title">🛒 تجهيز فطور الغد — 8:00 مساءً</div>
+<div id="prep"></div>
+</div>
+
+<div class="card">
+<div class="title">🏋️ تمرين اليوم</div>
+<div id="workout"></div>
+</div>
+
+<div class="card">
+<div class="title">🔔 الإشعارات</div>
+<p>على iPhone، نسخة الويب يمكن إضافتها للشاشة الرئيسية. الإشعارات التلقائية اليومية عند إغلاق التطبيق تحتاج Push Server/تطبيق iOS أصلي؛ هذه النسخة لا تتطلب أي اشتراك مدفوع.</p>
+<button class="btn" onclick="alert('أضف التطبيق إلى الشاشة الرئيسية من Safari: مشاركة → إضافة إلى الشاشة الرئيسية')">طريقة التثبيت</button>
+</div>
+</main>
+<script>
+const plans = {
+0:{name:"الأحد", breakfast:["3 بيضات كاملة","60غ خبز أسمر","150غ لبن يوناني","خضار"], lunch:["180غ صدر دجاج مطبوخ","150غ أرز مطبوخ","سلطة كبيرة"], pre:["موزة + 200غ لبن يوناني"], post:["200غ لبن يوناني أو 150غ جبنة قريش","فاكهة"], dinner:["180غ تونة مصفاة أو دجاج","سلطة + 1 خبز أسمر"], prep:"جهّز 3 بيضات، خبز أسمر، لبن يوناني وخضار."},
+1:{name:"الاثنين", breakfast:["2 بيض كامل + 150غ بياض بيض","60غ شوفان","100غ لبن يوناني","فاكهة"], lunch:["180غ لحم بقري قليل الدهن","200غ بطاطا","سلطة"], pre:["موزة + 2 كيك أرز"], post:["150غ دجاج + فاكهة"], dinner:["200غ لبن يوناني + 30غ شوفان + فاكهة","10غ مكسرات"], prep:"جهّز الشوفان والبيض واللبن والفاكهة."},
+2:{name:"الثلاثاء", breakfast:["3 بيضات","70غ خبز أسمر","150غ لبن يوناني","خضار"], lunch:["180غ دجاج","150غ أرز مطبوخ","خضار"], pre:["موزة + 150غ لبن يوناني"], post:["150–180غ دجاج أو تونة","فاكهة"], dinner:["180غ سمك","200غ بطاطا","سلطة"], prep:"جهّز البيض والخبز واللبن والخضار."},
+3:{name:"الأربعاء", breakfast:["2 بيض كامل + 150غ بياض","60غ شوفان","150غ لبن يوناني","توت/فاكهة"], lunch:["180غ دجاج","150غ أرز","سلطة"], pre:["موزة + لبن يوناني"], post:["200غ لبن يوناني + فاكهة"], dinner:["180غ لحم قليل الدهن","خضار + خبز أسمر"], prep:"جهّز الشوفان والبيض واللبن والفاكهة."},
+4:{name:"الخميس", breakfast:["3 بيضات","60غ خبز أسمر","150غ لبن يوناني","خضار"], lunch:["180غ سمك أو دجاج","200غ بطاطا","سلطة"], pre:["فاكهة + 150غ لبن يوناني"], post:["150غ دجاج أو تونة","فاكهة"], dinner:["200غ لبن يوناني + 30غ شوفان","10غ مكسرات"], prep:"جهّز البيض والخبز واللبن والخضار."},
+5:{name:"الجمعة", breakfast:["2 بيض كامل + 150غ بياض","60غ شوفان","150غ لبن يوناني","فاكهة"], lunch:["180غ دجاج","150غ أرز","سلطة"], pre:["موزة + 2 كيك أرز"], post:["لبن يوناني + فاكهة"], dinner:["180غ سمك أو تونة","سلطة + خبز أسمر"], prep:"جهّز الشوفان والبيض واللبن والفاكهة."},
+6:{name:"السبت", breakfast:["3 بيضات","60غ خبز أسمر","150غ لبن يوناني","خضار"], lunch:["180غ لحم قليل الدهن","150غ أرز","سلطة"], pre:["موزة + 150غ لبن يوناني"], post:["150–180غ دجاج أو تونة","فاكهة"], dinner:["180غ دجاج","خضار + بطاطا"], prep:"جهّز البيض والخبز واللبن والخضار."}
+};
+const workouts={
+0:["ظهر + بايسبس","Lat Pulldown — 3×8–12","Seated Cable Row — 3×8–12","One-arm Dumbbell Row — 3×8–12","Face Pull — 3×12–15","Dumbbell Curl — 3×10–12","Hammer Curl — 3×10–12"],
+1:["مشي/كارديو","مشي سريع 30–45 دقيقة","تمدد خفيف 5–10 دقائق"],
+2:["أرجل","Leg Press أو Squat — 3×8–12","Romanian Deadlift — 3×8–12","Leg Extension — 3×10–15","Leg Curl — 3×10–15","Calf Raise — 4×12–15","Plank — 3×30–60 ثانية"],
+3:["Upper Body","Bench Press — 3×8–10","Lat Pulldown — 3×8–12","Incline Dumbbell Press — 3×8–12","Cable Row — 3×8–12","Lateral Raise — 3×12–15","Biceps Curl — 2×10–15","Triceps Pushdown — 2×10–15"],
+4:["مشي/كارديو","مشي سريع 30–45 دقيقة","تمدد خفيف 5–10 دقائق"],
+5:["راحة","راحة كاملة أو مشي خفيف اختياري 20–30 دقيقة"],
+6:["صدر + كتف + ترايسبس","Bench Press — 3×6–10","Incline Dumbbell Press — 3×8–12","Chest Fly — 3×10–15","Shoulder Press — 3×8–12","Lateral Raise — 3×12–15","Triceps Pushdown — 3×10–15"]
+};
+const d=new Date(), day=d.getDay(), p=plans[day], w=workouts[day];
+function list(a){return "<ul>"+a.map(x=>"<li>"+x+"</li>").join("")+"</ul>"}
+document.getElementById("today").innerHTML=`
+<div class="card"><div class="time">09:30 — الفطور</div><div class="title">🥚 ${p.name}</div>${list(p.breakfast)}</div>
+<div class="card"><div class="time">16:00 — الغداء</div><div class="title">🍗 وجبة الغداء</div>${list(p.lunch)}</div>
+<div class="card"><div class="time">قبل التمرين</div><div class="title">🍌 وجبة قبل التمرين</div>${list(p.pre)}</div>
+<div class="card"><div class="time">بعد التمرين</div><div class="title">🥛 وجبة بعد التمرين</div>${list(p.post)}</div>
+<div class="card"><div class="title">🍽️ العشاء</div>${list(p.dinner)}</div>`;
+document.getElementById("prep").innerHTML=list([p.prep]);
+document.getElementById("workout").innerHTML="<div class='pill'>"+w[0]+"</div>"+list(w.slice(1));
+</script>
+</body>
+</html>
